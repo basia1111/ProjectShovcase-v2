@@ -6,18 +6,32 @@ import CategoryFilter from "./CategoryFilter";
 import ProjectGrid from "./ProjectGrid";
 import { Project } from "@types";
 import { useRouter, useSearchParams } from "next/navigation";
+import SelectFilter from "./SelectFilter";
+import { URLSearchParams as URLParams } from "url";
 
 const ExploreContent = ({ projects }: { projects: Project[] }) => {
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [activePage, setActivePage] = useState<number>(1);
+  const [sorting, setSorting] = useState<null | "asc" | "desc">(null);
+
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const handleSortingChange = (sort: null | "asc" | "desc") => {
+    setSorting(sort);
+    const newParams = new URLSearchParams();
+    if (activePage) newParams.set("page", String(activePage));
+    if (currentCategory) newParams.set("category", currentCategory);
+    if (sort) newParams.set("sort", String(sort));
+    updateURL(newParams);
+  };
 
   const handleCategoryChange = (category: string | null) => {
     setCurrentCategory(category);
     const newParams = new URLSearchParams();
     newParams.set("page", "1");
     if (category) newParams.set("category", category);
+    if (sorting) newParams.set("sort", String(sorting));
     updateURL(newParams);
   };
 
@@ -26,10 +40,11 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
     const newParams = new URLSearchParams();
     if (page) newParams.set("page", String(page));
     if (currentCategory) newParams.set("category", currentCategory);
+    if (sorting) newParams.set("sort", String(sorting));
     updateURL(newParams);
   };
 
-  const updateURL = (newParams: {}) => {
+  const updateURL = (newParams: URLParams) => {
     const queryString = newParams.toString();
     const newPath = queryString ? `?${queryString}` : "";
     router.push(newPath, { scroll: false });
@@ -38,9 +53,10 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
   useEffect(() => {
     const page = searchParams.get("page");
     const category = searchParams.get("category");
-
+    const sort = searchParams.get("sort");
     if (page) setActivePage(Number(page));
     if (category) setCurrentCategory(category);
+    if (sort) setSorting(sort as null | "asc" | "desc");
   }, []);
 
   return (
@@ -52,7 +68,12 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
           currentCategory={currentCategory}
         />
       </div>
-
+      <div className="py-4 flex justify-start">
+        <SelectFilter
+          handleSortingChange={handleSortingChange}
+          sorting={sorting}
+        />
+      </div>
       <div className="flex flex-col gap-8 lg:flex-row">
         <div className="flex-1">
           <ProjectGrid
@@ -60,6 +81,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
             currentCategory={currentCategory}
             activePage={activePage}
             handlePageChange={handlePageChange}
+            sorting={sorting}
           />
         </div>
 

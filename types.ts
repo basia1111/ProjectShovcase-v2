@@ -1,3 +1,5 @@
+import { Date } from "mongoose";
+
 export type User = {
   id: string;
   _id?: string;
@@ -24,6 +26,8 @@ export type Project = {
   cover?: string;
   status: string;
   category: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type ProfileComponentProps = {
