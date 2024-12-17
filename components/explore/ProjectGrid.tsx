@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useEffect, useMemo, useState } from 'react';
-import { Project } from '@types';
-import ProjectCard from '../project/ProjectCard';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useMemo, useState } from "react";
+import { Project } from "@types";
+import ProjectCard from "../project/ProjectCard";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type ProjectGridProps = {
   projects: Project[];
@@ -18,8 +18,8 @@ const ProjectGrid = ({ projects, currentCategory }: ProjectGridProps) => {
 
   // Initialize state from URL and props
   useEffect(() => {
-    const page = searchParams.get('page');
-    const category = searchParams.get('category');
+    const page = searchParams.get("page");
+    const category = searchParams.get("category");
 
     if (page) {
       setActivePage(Number(page));
@@ -60,13 +60,13 @@ const ProjectGrid = ({ projects, currentCategory }: ProjectGridProps) => {
   const updateURL = (page: number, category: string | null) => {
     const newParams = new URLSearchParams();
     if (page > 1) {
-      newParams.set('page', String(page));
+      newParams.set("page", String(page));
     }
     if (category) {
-      newParams.set('category', category);
+      newParams.set("category", category);
     }
     const queryString = newParams.toString();
-    const newPath = queryString ? `?${queryString}` : '';
+    const newPath = queryString ? `?${queryString}` : "";
     router.push(newPath, { scroll: false });
   };
 
@@ -86,7 +86,7 @@ const ProjectGrid = ({ projects, currentCategory }: ProjectGridProps) => {
     <>
       <div>
         <select
-          value={categoryFromUrl || ''}
+          value={categoryFromUrl || ""}
           onChange={(e) => handleCategoryChange(e.target.value)}
           className="mb-4 rounded p-2"
         >
@@ -109,8 +109,8 @@ const ProjectGrid = ({ projects, currentCategory }: ProjectGridProps) => {
             key={pageNum}
             className={`rounded-md border px-2 py-1 transition-all hover:text-emerald-300 ${
               pageNum === activePage
-                ? 'border-white/10 text-emerald-300'
-                : 'text-gray-200 border-transparent'
+                ? "border-white/10 text-emerald-300"
+                : "text-gray-200 border-transparent"
             }`}
           >
             {pageNum}

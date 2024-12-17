@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Search from './Search';
-import CategoryFilter from './CategoryFilter';
-import ProjectGrid from './ProjectGrid';
-import { Project } from '@types';
+import React, { useState } from "react";
+import Search from "./Search";
+import CategoryFilter from "./CategoryFilter";
+import ProjectGrid from "./ProjectGrid";
+import { Project } from "@types";
 
 const ExploreContent = ({ projects }: { projects: Project[] }) => {
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
@@ -13,7 +13,10 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
     <>
       <div className="mb-8 space-y-4">
         <Search />
-        <CategoryFilter setCurrentCategory={setCurrentCategory} currentCategory={currentCategory} />
+        <CategoryFilter
+          setCurrentCategory={setCurrentCategory}
+          currentCategory={currentCategory}
+        />
       </div>
 
       <div className="flex flex-col gap-8 lg:flex-row">
@@ -23,7 +26,9 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
 
         <div className="lg:w-80">
           <div className="sticky top-24 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-sm">
-            <h2 className="mb-6 text-lg font-semibold text-white">Trending Projects</h2>
+            <h2 className="mb-6 text-lg font-semibold text-white">
+              Trending Projects
+            </h2>
 
             <div className="space-y-4">
               {[1, 2, 3, 4, 5].map((index) => (
@@ -35,8 +40,12 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
                     {index}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-white hover:text-emerald-400">Project Name</h3>
-                    <p className="text-gray-400 text-sm">1.2k stars this week</p>
+                    <h3 className="font-medium text-white hover:text-emerald-400">
+                      Project Name
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      1.2k stars this week
+                    </p>
                   </div>
                 </div>
               ))}
