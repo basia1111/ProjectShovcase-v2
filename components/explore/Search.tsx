@@ -1,6 +1,6 @@
-import ModalButton from '@components/common/buttons/ModalButton';
-import React from 'react';
-import { FiFilter, FiSearch } from 'react-icons/fi';
+import ModalButton from "@components/common/buttons/ModalButton";
+import React from "react";
+import { FiFilter, FiSearch } from "react-icons/fi";
 
 const Search = () => {
   return (
