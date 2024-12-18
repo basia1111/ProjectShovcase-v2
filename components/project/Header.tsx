@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import ModalButton from "@components/common/buttons/ModalButton";
+import EditProjectForm from "@components/forms/EditProjectForm";
 import { Project } from "@types";
 import Link from "next/link";
 import React from "react";
@@ -8,8 +9,9 @@ import { FiCalendar, FiEdit } from "react-icons/fi";
 type HeaderProps = {
   mode: "private" | "public";
   project: Project;
+  setProject: React.Dispatch<React.SetStateAction<Project>>;
 };
-const Header = ({ mode, project }: HeaderProps) => {
+const Header = ({ mode, project, setProject }: HeaderProps) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -31,7 +33,12 @@ const Header = ({ mode, project }: HeaderProps) => {
         {mode === "private" && (
           <div className="absolute right-6 top-6 flex gap-2">
             <ModalButton
-              modalContent={<p>Modal content</p>}
+              modalContent={
+                <EditProjectForm
+                  project={project}
+                  setProject={setProject}
+                />
+              }
               className="inline-flex items-center gap-2 rounded-lg bg-[#161B22]/90 px-4 py-2 text-sm font-medium text-white ring-1 ring-white/10 transition-colors hover:bg-[#1C2128]"
             >
               <FiEdit className="h-4 w-4" />

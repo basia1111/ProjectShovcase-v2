@@ -22,27 +22,14 @@ export async function POST(request: NextRequest) {
   const inputFile = formData.get("cover") as File | null;
   const status = formData.get("status") as string;
   const category = formData.get("category") as string;
-  const techStackString = formData.get("techStack") as string;
-  const techStack = JSON.parse(techStackString);
-  const keyFeaturesString = formData.get("keyFeatures") as string;
-  const keyFeatures = JSON.parse(keyFeaturesString);
+  const techStack = JSON.parse(formData.get("techStack") as string);
+  const keyFeatures = JSON.parse(formData.get("keyFeatures") as string);
   const liveDemo = formData.get("liveDemo") as string;
   const documentation = formData.get("documentation") as string;
   const gitHub = formData.get("gitHub") as string;
   const author = session.user.id;
 
-  console.log("Received form data:", {
-    title,
-    description,
-    email,
-    status,
-    category,
-    techStack,
-    keyFeatures,
-    author,
-  });
-
-  if (!title || !description || !category || !status || !inputFile || !techStack || !keyFeatures || !inputFile) {
+  if (!title || !description || !email || !category || !status || !inputFile || !techStack || !keyFeatures || !inputFile) {
     return NextResponse.json({ message: "Sections marked with * are required" }, { status: 400 });
   }
 
@@ -75,8 +62,10 @@ export async function POST(request: NextRequest) {
 
     await newProject.save();
     await unlink(path);
-
-    return NextResponse.json({ newProject });
+    if (!newProject) {
+      return NextResponse.json({ message: "Failed to create project" }, { status: 500 });
+    }
+    return NextResponse.json({ newProject }, { status: 200 });
   } catch (error) {
     console.error("Server Error:", error);
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });

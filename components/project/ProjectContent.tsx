@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Project } from "@types";
 import Header from "./Header";
 import ProjectInfo from "./ProjectInfo";
@@ -9,13 +11,15 @@ import ProjectUpdates from "./ProjectUpdates";
 import ProjectLinks from "./ProjectLinks";
 import ProjectButtons from "./ProjectButtons";
 
-const ProjectContent = ({ project, mode }: { project: Project; mode: "private" | "public" }) => {
+const ProjectContent = ({ project: fetchedProject, mode }: { project: Project; mode: "private" | "public" }) => {
+  const [project, setProject] = useState<Project>(fetchedProject);
   return (
     <div className="min-h-screen w-full bg-[#0D1117] pt-20 -mt-20">
       <div className="mx-auto max-w-6xl px-6 py-8">
         <Header
           project={project}
           mode={mode}
+          setProject={setProject}
         />
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
           {/* Left Column */}
