@@ -1,6 +1,6 @@
-import connectDB from '@lib/db';
-import User from '@models/User';
-import { NextRequest, NextResponse } from 'next/server';
+import connectDB from "@lib/db";
+import User from "@models/User";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   const { id } = await params;
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   try {
     const user = await User.findById(id);
     if (!user) {
-      return NextResponse.json({ message: 'User not found' });
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
     const serializedUser = {
       id: user._id.toString(),
@@ -24,9 +24,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       coverImage: user?.coverImage,
     };
     console.error(user);
-    return NextResponse.json({ user: serializedUser });
+    return NextResponse.json({ user: serializedUser }, { status: 200 });
   } catch (error) {
-    console.error('error fetching user:', error);
-    return NextResponse.json({ message: 'Internal Server Error' });
+    return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }

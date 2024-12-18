@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   await connectDB();
 
   if (!session?.user?.id) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ message: "Unauthorized, no session" }, { status: 401 });
   }
 
   const title = formData.get("title") as string;
@@ -68,6 +68,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ newProject }, { status: 200 });
   } catch (error) {
     console.error("Server Error:", error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }
