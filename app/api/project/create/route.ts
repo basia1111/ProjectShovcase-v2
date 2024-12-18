@@ -45,6 +45,8 @@ export async function POST(request: NextRequest) {
       public_id: `${author}_${title.replace(/\s+/g, "_")}`,
     });
 
+    await unlink(path).catch(console.error);
+
     const newProject = new Project({
       title,
       description,

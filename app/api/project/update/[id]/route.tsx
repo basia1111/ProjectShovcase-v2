@@ -86,7 +86,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
         const uploadResponse = await cloudinary.uploader.upload(tempPath, {
           folder: "project_cover_pictures",
-          public_id: `${session.user.id}_${updateData.title.toString().replace(/\s+/g, "_")}`,
+          public_id: `${project.author}_${updateData.title.replace(/\s+/g, "_")}`,
         });
         await unlink(tempPath).catch(console.error);
 

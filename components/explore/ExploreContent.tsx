@@ -14,9 +14,20 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [activePage, setActivePage] = useState<number>(1);
   const [sorting, setSorting] = useState<null | "asc" | "desc">(null);
+  const [queryString, setQueryString] = useState<string>("");
 
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const handleQueryChange = (query: string) => {
+    setQueryString(query);
+    const newParams = new URLSearchParams();
+    if (activePage) newParams.set("page", String(activePage));
+    if (currentCategory) newParams.set("category", currentCategory);
+    if (sorting) newParams.set("sort", String(sorting));
+    if (query) newParams.set("query", String(query));
+    updateURL(newParams);
+  };
 
   const handleSortingChange = (sort: null | "asc" | "desc") => {
     setSorting(sort);
@@ -24,6 +35,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
     if (activePage) newParams.set("page", String(activePage));
     if (currentCategory) newParams.set("category", currentCategory);
     if (sort) newParams.set("sort", String(sort));
+    if (queryString) newParams.set("query", String(queryString));
     updateURL(newParams);
   };
 
@@ -33,6 +45,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
     newParams.set("page", "1");
     if (category) newParams.set("category", category);
     if (sorting) newParams.set("sort", String(sorting));
+    if (queryString) newParams.set("query", String(queryString));
     updateURL(newParams);
   };
 
@@ -42,6 +55,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
     if (page) newParams.set("page", String(page));
     if (currentCategory) newParams.set("category", currentCategory);
     if (sorting) newParams.set("sort", String(sorting));
+    if (queryString) newParams.set("query", String(queryString));
     updateURL(newParams);
   };
 
@@ -55,15 +69,21 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
     const page = searchParams.get("page");
     const category = searchParams.get("category");
     const sort = searchParams.get("sort");
+    const query = searchParams.get("query");
     if (page) setActivePage(Number(page));
     if (category) setCurrentCategory(category);
     if (sort) setSorting(sort as null | "asc" | "desc");
-  }, []);
+    if (query) setQueryString(query);
+  }, [searchParams]);
 
   return (
     <>
       <div className="mb-8 space-y-4">
-        <Search />
+        <Search
+          queryString={queryString}
+          handleQueryChange={handleQueryChange}
+          setQueryString={setQueryString}
+        />
         <CategoryFilter
           handleCategoryChange={handleCategoryChange}
           currentCategory={currentCategory}
@@ -83,6 +103,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
             activePage={activePage}
             handlePageChange={handlePageChange}
             sorting={sorting}
+            query={queryString}
           />
         </div>
 
