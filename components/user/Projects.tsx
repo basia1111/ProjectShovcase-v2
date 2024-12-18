@@ -1,19 +1,27 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { ProfileComponentProps, Project } from '@types';
-import { FiPackage, FiPlusCircle } from 'react-icons/fi';
-import ProjectCard from '@components/project/ProjectCard';
-import ModalButton from '@components/common/buttons/ModalButton';
-import CreateProjectForm from '@components/forms/CreateProjectForm';
-import { BounceLoader } from 'react-spinners';
+import React, { useEffect, useState } from "react";
+import { Project } from "@types";
+import { FiPackage, FiPlusCircle } from "react-icons/fi";
+import ProjectCard from "@components/project/ProjectCard";
+import ModalButton from "@components/common/buttons/ModalButton";
+import CreateProjectForm from "@components/forms/CreateProjectForm";
+import { BounceLoader } from "react-spinners";
+import { User } from "next-auth";
 
-const Projects = ({ user, isOwner }: ProfileComponentProps) => {
+export type ProjectsProps = {
+  user: User;
+  isOwner: boolean;
+  setProjectsNumber: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const Projects = ({ user, isOwner, setProjectsNumber }: ProjectsProps) => {
   const [projectsList, setProjectsList] = useState<Project[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const updateProjects = (newProject: Project) => {
     setProjectsList((prev) => (prev ? [...prev, newProject] : [newProject]));
+    setProjectsNumber(projectsList?.length ? projectsList?.length + 1 : 1);
   };
 
   const fetchProjects = async () => {
@@ -24,11 +32,13 @@ const Projects = ({ user, isOwner }: ProfileComponentProps) => {
 
       if (response.ok) {
         setProjectsList(data.projects || []);
+        setProjectsNumber(data.projects.length);
       } else {
+        setProjectsNumber(0);
         setProjectsList(null);
       }
     } catch {
-      console.error('error');
+      console.error("error");
     }
     setIsLoading(false);
   };
@@ -60,30 +70,30 @@ const Projects = ({ user, isOwner }: ProfileComponentProps) => {
                 project={project}
                 setProjectsList={setProjectsList}
                 isOwner={isOwner}
+                setProjectsNumber={setProjectsNumber}
               />
             ))}
           </div>
         ) : !isLoading ? (
           <>
             <span className="mb-4 h-16 w-16 rounded-full bg-teal-400/10 p-4">
-              <FiPackage size={32} className="text-teal-400" />
+              <FiPackage
+                size={32}
+                className="text-teal-400"
+              />
             </span>
             {isOwner ? (
               <>
                 <h2 className="mb-2 text-xl font-light text-white">No Projects Yet</h2>
                 <p className="text-md text-gray-400 max-w-md text-center font-light">
-                  Start showcasing your work by adding your first project. Click the &quot;New
-                  Project&quot; button to begin!
+                  Start showcasing your work by adding your first project. Click the &quot;New Project&quot; button to begin!
                 </p>
               </>
             ) : (
               <>
-                {' '}
-                <h2 className="mb-2 text-xl font-light text-white">No Projects Yet</h2>{' '}
-                <p className="text-md text-gray-400 max-w-md text-center font-light">
-                  {' '}
-                  This user hasn&apos;t added any projects yet.{' '}
-                </p>
+                {" "}
+                <h2 className="mb-2 text-xl font-light text-white">No Projects Yet</h2>{" "}
+                <p className="text-md text-gray-400 max-w-md text-center font-light"> This user hasn&apos;t added any projects yet. </p>
               </>
             )}
           </>

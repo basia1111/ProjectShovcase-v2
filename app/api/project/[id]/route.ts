@@ -9,7 +9,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
   try {
     const project = await Project.findById(id).populate("author", "_id name image").lean();
-    console.error(project);
     if (!project) {
       return NextResponse.json({ message: "Project not found" }, { status: 404 });
     }

@@ -8,7 +8,7 @@ const ProjectButtons = ({ project }: { project: Project }) => {
       <div className="space-y-3">
         <a
           href={project.gitHub}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-teal-500 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-600"
+          className="inline-flex w-full  items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300 group bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
         >
           <FiGithub className="h-4 w-4" />
           Star on GitHub

@@ -16,7 +16,6 @@ export async function GET() {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Project fetch error:", error);
     return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }

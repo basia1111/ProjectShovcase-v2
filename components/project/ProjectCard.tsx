@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { IoTrashBinOutline } from "react-icons/io5";
@@ -20,9 +21,10 @@ type ProjectCardType = {
   project: Project;
   setProjectsList?: React.Dispatch<React.SetStateAction<Project[] | null>>;
   isOwner: boolean;
+  setProjectsNumber?: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => {
+const ProjectCard = ({ project, setProjectsList, isOwner, setProjectsNumber }: ProjectCardType) => {
   const getStatusColor = (status: string) => {
     const statusObj = PROJECT_STATUSES.find((s) => s.value === status);
     return statusObj?.color;
@@ -89,6 +91,7 @@ const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => 
                       <DeleteProject
                         setProjectsList={setProjectsList}
                         id={project._id}
+                        setProjectsNumber={setProjectsNumber}
                       />
                     }
                     className="group/btn flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 hover:bg-red-500/20"

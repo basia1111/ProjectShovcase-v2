@@ -45,8 +45,6 @@ export async function POST(request: NextRequest) {
       public_id: `${author}_${title.replace(/\s+/g, "_")}`,
     });
 
-    await unlink(path).catch(console.error);
-
     const newProject = new Project({
       title,
       description,
@@ -69,7 +67,6 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json({ newProject }, { status: 200 });
   } catch (error) {
-    console.error("Server Error:", error);
     return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }
