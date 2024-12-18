@@ -18,7 +18,7 @@ const SelectFilter = ({ handleSortingChange, sorting }: SelectFilterProps) => {
       <select
         onChange={handleChange}
         value={sorting ? sorting : "none"}
-        className="bg-[#161B22] text-gray-300 rounded-lg pl-8 pr-4 py-3 ring-1 ring-white/10 font-medium transition-all duration-200 hover:bg-[#1C2128] focus:outline-none focus:ring-2 focus:ring-teal-500"
+        className="text-gray-300 bg-[#161B22] ring-1 ring-white/10  rounded-lg pl-8 pr-4 py-3  font-medium transition-all duration-200 hover:bg-[#1C2128] focus:outline-none focus:ring-2 focus:ring-teal-500"
       >
         <option
           value="none"

@@ -8,6 +8,7 @@ import { Project } from "@types";
 import { useRouter, useSearchParams } from "next/navigation";
 import SelectFilter from "./SelectFilter";
 import { URLSearchParams as URLParams } from "url";
+import Card from "@components/common/Card";
 
 const ExploreContent = ({ projects }: { projects: Project[] }) => {
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
@@ -86,7 +87,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
         </div>
 
         <div className="lg:w-80">
-          <div className="sticky top-24 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-sm">
+          <Card className="sticky  top-24 rounded-2xl flex-col w-full px-6 py-6 items-start justify-start">
             <h2 className="mb-6 text-lg font-semibold text-white">Trending Projects</h2>
 
             <div className="space-y-4">
@@ -103,7 +104,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </>
