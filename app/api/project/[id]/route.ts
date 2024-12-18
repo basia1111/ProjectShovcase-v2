@@ -1,0 +1,20 @@
+import connectDB from "@lib/db";
+import Project from "@models/Project";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = await params;
+
+  await connectDB();
+
+  try {
+    const project = await Project.findById(id).populate("author", "_id name image").lean();
+    console.error(project);
+    if (!project) {
+      return NextResponse.json({ message: "Project not found" }, { status: 404 });
+    }
+    return NextResponse.json({ project });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
+  }
+}

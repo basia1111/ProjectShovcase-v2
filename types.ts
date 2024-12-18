@@ -24,8 +24,17 @@ export type Project = {
   description: string;
   author: User;
   cover?: string;
+  email: string;
   status: string;
   category: string;
+  techStack: string[];
+  keyFeatures: {
+    title: string;
+    description: string;
+  }[];
+  gitHub?: string[];
+  documentation?: string[];
+  liveDemo?: string[];
   createdAt: Date;
   updatedAt: Date;
 };

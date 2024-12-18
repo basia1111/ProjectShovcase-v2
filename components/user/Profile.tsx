@@ -1,17 +1,17 @@
-import React from 'react';
-import ProfileContent from './ProfileContent';
-import { User } from '@types';
-import { notFound } from 'next/navigation';
+import React from "react";
+import ProfileContent from "./ProfileContent";
+import { User } from "@types";
+import { notFound } from "next/navigation";
 
 type ProfileProps = {
   userId: string;
-  viewMode: 'private' | 'public';
+  viewMode: "private" | "public";
 };
 
 async function fetchUser(userId: string): Promise<User | null> {
   try {
     const response = await fetch(`${process.env.API_URL}/api/user/${userId}`, {
-      cache: 'no-store',
+      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -24,7 +24,7 @@ async function fetchUser(userId: string): Promise<User | null> {
     const data = await response.json();
     return data.user as User;
   } catch (error) {
-    console.error('Error fetching user:', error);
+    console.error("Error fetching user:", error);
     return null;
   }
 }
@@ -36,7 +36,12 @@ const Profile = async ({ userId, viewMode }: ProfileProps) => {
     notFound();
   }
 
-  return <ProfileContent viewMode={viewMode} user={user} />;
+  return (
+    <ProfileContent
+      viewMode={viewMode}
+      user={user}
+    />
+  );
 };
 
 export default Profile;

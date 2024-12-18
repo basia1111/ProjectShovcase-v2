@@ -1,11 +1,11 @@
-import React from 'react';
-import { FiArrowRight } from 'react-icons/fi';
-import { IoTrashBinOutline } from 'react-icons/io5';
-import Link from 'next/link';
-import { PROJECT_CATEGORIES, PROJECT_STATUSES } from '@projectConstants';
-import DeleteProject from '@components/forms/DeleteProject';
-import ModalButton from '@components/common/buttons/ModalButton';
-import { Project } from '@types';
+import React from "react";
+import { FiArrowRight } from "react-icons/fi";
+import { IoTrashBinOutline } from "react-icons/io5";
+import Link from "next/link";
+import { PROJECT_CATEGORIES, PROJECT_STATUSES } from "@projectConstants";
+import DeleteProject from "@components/forms/DeleteProject";
+import ModalButton from "@components/common/buttons/ModalButton";
+import { Project } from "@types";
 
 const DefaultProjectCover = () => (
   <div className="relative h-full w-full bg-[#161B22]">
@@ -33,7 +33,11 @@ const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => 
       <div className="relative overflow-hidden rounded-xl bg-[#161B22]/80 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:ring-white/20">
         <div className="relative h-48">
           {project.cover ? (
-            <img src={project.cover} alt={project.title} className="h-full w-full object-cover" />
+            <img
+              src={project.cover}
+              alt={project.title}
+              className="h-full w-full object-cover"
+            />
           ) : (
             <DefaultProjectCover />
           )}
@@ -51,9 +55,7 @@ const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => 
                 className="h-1.5 w-1.5 rounded-full"
                 style={{ backgroundColor: getStatusColor(project.status) }}
               />
-              <span className="text-xs font-medium text-white/70">
-                {PROJECT_CATEGORIES.find((c) => c.value === project.category)?.label}
-              </span>
+              <span className="text-xs font-medium text-white/70">{PROJECT_CATEGORIES.find((c) => c.value === project.category)?.label}</span>
             </div>
           </div>
         </div>
@@ -63,14 +65,12 @@ const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => 
 
           <div className="relative">
             <h3 className="mb-2 text-lg font-semibold text-white">{project.title}</h3>
-            <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-white/60">
-              {project.description}
-            </p>
+            <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-white/60">{project.description}</p>
 
             <div className="flex items-center justify-between pt-4">
               <div className="flex items-center gap-3">
                 <img
-                  src={project.author.image || '/images/avatar.png'}
+                  src={project.author.image || "/images/avatar.png"}
                   alt={project.author.name}
                   className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10"
                 />
@@ -86,7 +86,10 @@ const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => 
                 {isOwner && setProjectsList && (
                   <ModalButton
                     modalContent={
-                      <DeleteProject setProjectsList={setProjectsList} id={project._id} />
+                      <DeleteProject
+                        setProjectsList={setProjectsList}
+                        id={project._id}
+                      />
                     }
                     className="group/btn flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 hover:bg-red-500/20"
                   >
@@ -98,7 +101,7 @@ const ProjectCard = ({ project, setProjectsList, isOwner }: ProjectCardType) => 
                 )}
 
                 <Link
-                  href={`/projects/${project.id}`}
+                  href={`/project/${project._id}`}
                   className="group/btn flex items-center gap-2 rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:from-teal-500 hover:to-emerald-500"
                 >
                   View
