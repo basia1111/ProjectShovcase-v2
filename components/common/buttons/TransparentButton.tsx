@@ -5,11 +5,11 @@ type TransparentButtonProps = {
   className?: string;
 };
 const TransparentButton = ({ children, className = "", ...props }: TransparentButtonProps) => (
-  <button
-    className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300 group bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10 ${className}`}
+  <div
+    className={`inline-flex items-center   cursor-pointer justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300 group bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10 ${className}`}
     {...props}
   >
     {children}
-  </button>
+  </div>
 );
 export default TransparentButton;

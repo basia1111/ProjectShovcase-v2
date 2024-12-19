@@ -22,7 +22,7 @@ const Header = ({ mode, project, setProject }: HeaderProps) => {
   };
   return (
     <div className="mb-8 overflow-hidden rounded-xl bg-[#161B22] shadow-xl ring-1 ring-white/10">
-      <div className="relative h-[400px]">
+      <div className="relative md:h-[400px] h-[300px]">
         <img
           src={project.cover}
           alt={project.title}
@@ -31,7 +31,7 @@ const Header = ({ mode, project, setProject }: HeaderProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/70 to-transparent" />
 
         {mode === "private" && (
-          <div className="absolute right-6 top-6 flex gap-2">
+          <div className="absolute md:right-6 md:top-6  right-3 top-3 flex gap-2">
             <ModalButton
               modalContent={
                 <EditProjectForm
@@ -39,21 +39,21 @@ const Header = ({ mode, project, setProject }: HeaderProps) => {
                   setProject={setProject}
                 />
               }
-              className="inline-flex items-center gap-2 rounded-lg bg-[#161B22]/90 px-4 py-2 text-sm font-medium text-white ring-1 ring-white/10 transition-colors hover:bg-[#1C2128]"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#161B22]/60 px-4 py-2  text-xs md:text-sm font-medium text-white ring-1 ring-white/10 transition-colors hover:bg-[#1C2128]"
             >
-              <FiEdit className="h-4 w-4" />
+              <FiEdit className="md:size-4 size-3" />
               Edit Project
             </ModalButton>
           </div>
         )}
 
-        <div className="absolute bottom-0 left-0 right-0 p-8">
-          <h1 className="mb-6 text-4xl font-bold text-white">{project.title}</h1>
+        <div className="absolute bottom-0 left-0 right-0 md:p-8 p-4">
+          <h1 className="md:mb-6 mb-2 md:text-4xl text-2xl font-bold text-white">{project.title}</h1>
           <Link
             href={`/profile/${project.author._id}`}
-            className="group flex items-center gap-3 text-gray-300 hover:text-white"
+            className="group flex items-center md:gap-3 gap-3 text-gray-300 hover:text-white"
           >
-            <div className="relative h-12 w-12 overflow-hidden rounded-full ring-2 ring-teal-500/30 group-hover:ring-teal-500/50 transition-all">
+            <div className="relative md:h-12 md:w-12 h-8 w-8  overflow-hidden rounded-full ring-2 ring-teal-500/30 group-hover:ring-teal-500/50 transition-all">
               <img
                 src={project.author.image || "/images/avatar.png"}
                 alt={project.author.name}
@@ -61,9 +61,9 @@ const Header = ({ mode, project, setProject }: HeaderProps) => {
               />
             </div>
             <div>
-              <span className="font-medium block">{project.author.name}</span>
-              <span className="text-sm text-gray-400">
-                <FiCalendar className="inline-block h-4 w-4 text-teal-500 mr-2" />
+              <span className="font-medium block md;text-base text-sm ">{project.author.name}</span>
+              <span className="md:text-sm text-xs text-gray-400">
+                <FiCalendar className="inline-block md:size-4 size-3 text-teal-500 mr-2" />
                 {formatDate(project.createdAt)}
               </span>
             </div>

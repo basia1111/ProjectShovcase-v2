@@ -4,7 +4,7 @@ import { FiBook, FiExternalLink, FiGithub, FiLink } from "react-icons/fi";
 
 const ProjectLinks = ({ project }: { project: Project }) => {
   return (
-    <div className="rounded-xl bg-[#161B22] p-6 ring-1 ring-white/10">
+    <div className="rounded-xl bg-[#161B22] md:p-6 p-3 ring-1 ring-white/10">
       <h2 className="mb-4 text-lg font-semibold text-white">Project Links</h2>
       <div className="space-y-3 text-sm">
         {project.gitHub && (

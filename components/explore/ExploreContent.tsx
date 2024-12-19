@@ -108,7 +108,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
         </div>
 
         <div className="lg:w-80">
-          <Card className="sticky  top-24 rounded-2xl flex-col w-full px-6 py-6 items-start justify-start">
+          <Card className="sticky  top-24 rounded-2xl flex-col w-full px-4 md:px-6 py-6 items-start justify-start">
             <h2 className="mb-6 text-lg font-semibold text-white">Trending Projects</h2>
 
             <div className="space-y-4">

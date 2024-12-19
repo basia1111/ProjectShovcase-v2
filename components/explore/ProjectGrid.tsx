@@ -67,10 +67,10 @@ const ProjectGrid = ({ projects, currentCategory, activePage, handlePageChange, 
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {filteredProjects.slice(resultsFrom, resultsTo).map((project) => (
               <ProjectCard
-                key={project.id}
+                key={project._id}
                 project={project}
                 isOwner={false}
               />

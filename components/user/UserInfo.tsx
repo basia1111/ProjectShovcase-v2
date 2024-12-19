@@ -12,21 +12,21 @@ import { Stat } from "./Stat";
 type UserInfoProps = {
   user: User;
   isOwner: boolean;
-  projectNumber: number;
+  projectsNumber: number;
 };
 
-const UserInfo = ({ user, isOwner, projectNumber }: UserInfoProps) => {
+const UserInfo = ({ user, isOwner, projectsNumber }: UserInfoProps) => {
   const formatJoinDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-US", { month: "short", year: "numeric" });
   };
 
   return (
-    <div className="border-t border-white/10 bg-[#161B22] p-6">
-      <div className="flex items-start justify-between gap-8">
+    <div className="border-t border-white/10 bg-[#161B22] md:p-6 p-3">
+      <div className="flex md:flex-row flex-col items-start justify-between gap-8">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-4 mb-4">
-            <div className="relative -mt-16">
-              <div className="h-32 w-32 overflow-hidden rounded-xl bg-[#161B22] ring-4 ring-[#161B22]">
+            <div className="relative md:-mt-16">
+              <div className="md:h-32 md:w-32 w-16 h-16 overflow-hidden rounded-xl bg-[#161B22] ring-4 ring-[#161B22]">
                 <Image
                   src={user?.image || "/images/avatar.png"}
                   alt={user?.name}
@@ -41,30 +41,30 @@ const UserInfo = ({ user, isOwner, projectNumber }: UserInfoProps) => {
                   modalContent={<EditProfileImageForm />}
                   className="absolute -right-2 -top-2 rounded-full bg-[#1C2128] p-2 text-gray-400 ring-1 ring-white/10 hover:text-white hover:bg-[#242B35] transition-all duration-300"
                 >
-                  <FaCamera className="h-4 w-4" />
+                  <FaCamera className="md:size-4 size-3" />
                 </ModalButton>
               )}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-3xl font-bold text-white">{user?.name}</h1>
+                <h1 className="md:text-3xl text-xl font-bold text-white">{user?.name}</h1>
                 {isOwner && (
                   <ModalButton
                     modalContent={<EditUserDataForm />}
                     className="rounded-full bg-[#1C2128] p-2 text-gray-400 ring-1 ring-white/10 hover:text-white hover:bg-[#242B35] transition-all duration-300"
                   >
-                    <FaPencilAlt className="h-4 w-4" />
+                    <FaPencilAlt className="md:size-4 size-3" />
                   </ModalButton>
                 )}
               </div>
-              <p className="text-gray-400">{user?.professionalTitle}</p>
+              <p className="text-gray-400 md:-text-base text-xs">{user?.professionalTitle}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4 mt-4">
             <Stat
               icon={FiPackage}
-              value={`${projectNumber} ${projectNumber == 1 ? "Project" : "Projects"}`}
+              value={`${projectsNumber} ${projectsNumber == 1 ? "Project" : "Projects"}`}
             />
             {user?.city && (
               <Stat
@@ -81,7 +81,7 @@ const UserInfo = ({ user, isOwner, projectNumber }: UserInfoProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-3">
+        <div className="flex md:flex-col flex-row  md:w-auto w-full md:justify-normal justify-between items-end gap-3">
           <a
             href={`mailto:${user.email}`}
             className="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300 group bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
@@ -98,9 +98,9 @@ const UserInfo = ({ user, isOwner, projectNumber }: UserInfoProps) => {
                 <FiGithub className="h-5 w-5" />
               </a>
             )}
-            {user?.socialMedia?.linkedIn && (
+            {user?.socialMedia?.linkedin && (
               <a
-                href={user.socialMedia.linkedIn}
+                href={user.socialMedia.linkedin}
                 className="rounded-lg bg-[#1C2128] p-2 text-gray-400 ring-1 ring-white/10 hover:bg-[#242B35] hover:text-white transition-colors"
               >
                 <FiLinkedin className="h-5 w-5" />

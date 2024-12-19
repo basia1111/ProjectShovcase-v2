@@ -8,15 +8,17 @@ type CategoryFilterProps = {
 };
 const CategoryFilter = ({ handleCategoryChange, currentCategory }: CategoryFilterProps) => {
   return (
-    <div className="mb-12 flex flex-wrap gap-2">
+    <div className="md:mb-12 mb-0 flex flex-wrap gap-2">
       <Card
         onClick={() => handleCategoryChange(null)}
         key="all"
-        className={
-          currentCategory === null
-            ? " rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
-            : "rounded-lg"
-        }
+        className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1
+          ${
+            currentCategory === null
+              ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
+              : "rounded-lg"
+          }
+        `}
       >
         All
       </Card>
@@ -24,11 +26,13 @@ const CategoryFilter = ({ handleCategoryChange, currentCategory }: CategoryFilte
         <Card
           onClick={() => handleCategoryChange(category.value)}
           key={category.label}
-          className={
-            currentCategory === category.value
-              ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
-              : "rounded-lg"
-          }
+          className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1
+            ${
+              currentCategory === category.value
+                ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
+                : "rounded-lg"
+            }
+          `}
         >
           {category.label}
         </Card>

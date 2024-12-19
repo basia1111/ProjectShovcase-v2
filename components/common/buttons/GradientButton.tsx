@@ -5,11 +5,11 @@ type GradientButtonProps = {
   className?: string;
 };
 const GradientButton = ({ children, className = "", ...props }: GradientButtonProps) => (
-  <button
-    className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300 group bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500 ${className}`}
+  <div
+    className={`inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-all duration-300 group bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500 ${className}`}
     {...props}
   >
     {children}
-  </button>
+  </div>
 );
 export default GradientButton;

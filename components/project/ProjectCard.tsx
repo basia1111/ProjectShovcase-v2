@@ -66,7 +66,14 @@ const ProjectCard = ({ project, setProjectsList, isOwner, setProjectsNumber }: P
           <div className="absolute inset-0 bg-gradient-to-b from-[#161B22]/50 to-[#1C2128]/50" />
 
           <div className="relative">
-            <h3 className="mb-2 text-lg font-semibold text-white">{project.title}</h3>
+            <Link
+              href={`/project/${project._id}`}
+              className="group/btn flex gap-2 items-center mb-2"
+            >
+              <h3 className=" text-lg font-semibold text-white">{project.title}</h3>
+              <FiArrowRight className="transition-transform text-white opacity-0 duration-200 group-hover/btn:translate-x-0.5  group-hover/btn:opacity-100" />
+            </Link>
+
             <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-white/60">{project.description}</p>
 
             <div className="flex items-center justify-between pt-4">
@@ -85,7 +92,7 @@ const ProjectCard = ({ project, setProjectsList, isOwner, setProjectsNumber }: P
               </div>
 
               <div className="flex items-center gap-2">
-                {isOwner && setProjectsList && (
+                {isOwner && setProjectsList && setProjectsNumber && (
                   <ModalButton
                     modalContent={
                       <DeleteProject
@@ -105,7 +112,7 @@ const ProjectCard = ({ project, setProjectsList, isOwner, setProjectsNumber }: P
 
                 <Link
                   href={`/project/${project._id}`}
-                  className="group/btn flex items-center gap-2 rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:from-teal-500 hover:to-emerald-500"
+                  className="group/btn hidden mdflex items-center gap-2 rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:from-teal-500 hover:to-emerald-500"
                 >
                   View
                   <FiArrowRight className="transition-transform duration-300 group-hover/btn:translate-x-0.5" />

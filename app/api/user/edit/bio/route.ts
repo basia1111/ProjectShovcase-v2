@@ -18,7 +18,7 @@ export async function PUT(request: NextRequest) {
   const city = formData.get("city") as string;
   const twitter = formData.get("twitter") as string;
   const github = formData.get("github") as string;
-  const linkedIn = formData.get("linkedIn") as string;
+  const linkedin = formData.get("linkedin") as string;
 
   if (!name) {
     return NextResponse.json({ message: "Name is required field." }, { status: 400 });
@@ -33,7 +33,7 @@ export async function PUT(request: NextRequest) {
         professionalTitle: professionalTitle,
         "socialMedia.twitter": twitter,
         "socialMedia.github": github,
-        "socialMedia.linkedIn": linkedIn,
+        "socialMedia.linkedin": linkedin,
       },
       {
         new: true,

@@ -15,7 +15,7 @@ type ProfileProps = {
 
 const ProfileContent = ({ user: serverUser, viewMode }: ProfileProps) => {
   const { user: contextUser } = useContext(UserContext)!;
-  const [projectNumber, setProjectsNumber] = useState<number>(0);
+  const [projectsNumber, setProjectsNumber] = useState<number>(0);
   const user = viewMode === "private" ? contextUser || serverUser : serverUser;
   const isOwner = viewMode === "private";
 
@@ -27,7 +27,7 @@ const ProfileContent = ({ user: serverUser, viewMode }: ProfileProps) => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(45,212,191,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(45,212,191,0.01)_1px,transparent_1px)] bg-[size:14px_14px]" />
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-8">
+      <div className="mx-auto max-w-6xl md:px-6 px-4 py-8">
         <div className="mb-6 overflow-hidden rounded-xl bg-[#161B22] shadow-xl ring-1 ring-white/10">
           <Cover
             user={user}
@@ -36,7 +36,7 @@ const ProfileContent = ({ user: serverUser, viewMode }: ProfileProps) => {
           <UserInfo
             user={user}
             isOwner={isOwner}
-            projectNumber={projectNumber}
+            projectsNumber={projectsNumber}
           />
         </div>
 

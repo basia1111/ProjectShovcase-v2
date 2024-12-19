@@ -12,7 +12,7 @@ type CoverProps = {
 
 const Cover = ({ user, isOwner }: CoverProps) => {
   return (
-    <div className="relative h-[300px]">
+    <div className="relative md:h-[300px] h-[200px]">
       {user?.coverImage ? (
         <img
           src={user.coverImage}
@@ -38,12 +38,12 @@ const Cover = ({ user, isOwner }: CoverProps) => {
       )}
 
       {isOwner && (
-        <div className="absolute right-6 top-6 flex gap-2">
+        <div className="absolute md:right-6 md:top-6 top-3 right-3 flex gap-2">
           <ModalButton
             modalContent={<EditProfileCoverForm />}
-            className="inline-flex items-center gap-2 rounded-lg bg-[#161B22] px-4 py-2 text-sm font-medium text-white ring-1 ring-white/10 transition-colors hover:bg-[#1C2128]"
+            className="inline-flex items-center md:text-base text-xs gap-2 rounded-lg bg-[#161B22] px-4 py-2  font-medium text-white ring-1 ring-white/10 transition-colors hover:bg-[#1C2128]"
           >
-            <FaPaintBrush className="h-4 w-4" />
+            <FaPaintBrush className="md:size-4 size-3" />
             Edit Cover
           </ModalButton>
         </div>

@@ -1,4 +1,4 @@
-import { Project } from "@types";
+import { Project as ProjectType } from "@types";
 import { notFound } from "next/navigation";
 import React from "react";
 import ProjectContent from "./ProjectContent";
@@ -7,7 +7,7 @@ import { auth } from "@auth";
 type ProjectProps = {
   id: string;
 };
-async function fethProject(id: string): Promise<Project | null> {
+async function fethProject(id: string): Promise<ProjectType | null> {
   try {
     const response = await fetch(`${process.env.API_URL}/api/project/${id}`, {
       cache: "no-store",
@@ -21,7 +21,7 @@ async function fethProject(id: string): Promise<Project | null> {
     }
 
     const data = await response.json();
-    return data.project as Project;
+    return data.project as ProjectType;
   } catch (error) {
     console.error("Error fetching user:", error);
     return null;

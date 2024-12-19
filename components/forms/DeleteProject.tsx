@@ -31,7 +31,9 @@ const DeleteProject = ({ id, setProjectsList, setProjectsNumber }: DeleteProject
           if (!prev) return null;
           return prev.filter((project) => project._id != id);
         });
-        setProjectsNumber((prev) => prev - 1);
+        setProjectsNumber((prev) => {
+          return prev ? prev - 1 : 0;
+        });
         closeModal();
       } else {
         setMessage(data.message);

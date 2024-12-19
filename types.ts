@@ -9,7 +9,7 @@ export type User = {
   about?: string;
   socialMedia?: {
     twitter?: string;
-    linkedIn?: string;
+    linkedin?: string;
     github?: string;
   };
   coverImage?: string;
