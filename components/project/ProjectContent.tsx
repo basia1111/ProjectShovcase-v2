@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { Project } from "@types";
-import Header from "./Header";
-import ProjectInfo from "./ProjectInfo";
-import TechStack from "./TechStack";
-import ProjectDescription from "./ProjectDescription";
-import KeyFeatures from "./KeyFeatures";
-import ProjectLinks from "./ProjectLinks";
-import ProjectButtons from "./ProjectButtons";
+import Header from "./projectPage/Header";
+import ProjectInfo from "./projectPage/ProjectInfo";
+import TechStack from "./projectPage/TechStack";
+import ProjectDescription from "./projectPage/ProjectDescription";
+import KeyFeatures from "./projectPage/KeyFeatures";
+import ProjectLinks from "./projectPage/ProjectLinks";
+import ProjectButtons from "./projectPage/ProjectButtons";
 
 const ProjectContent = ({ project: fetchedProject, mode }: { project: Project; mode: "private" | "public" }) => {
   const [project, setProject] = useState<Project>(fetchedProject);

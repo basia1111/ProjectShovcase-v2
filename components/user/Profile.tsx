@@ -7,7 +7,6 @@ type ProfileProps = {
   userId: string;
   viewMode: "private" | "public";
 };
-
 async function fetchUser(userId: string): Promise<User | null> {
   try {
     const response = await fetch(`${process.env.API_URL}/api/user/${userId}`, {

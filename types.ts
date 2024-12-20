@@ -31,12 +31,15 @@ export type Project = {
   keyFeatures: {
     title: string;
     description: string;
-  }[];
+  };
+  likedBy: User[];
+  likeCount: number;
   gitHub?: string;
   documentation?: string;
   liveDemo?: string;
   createdAt: string;
   updatedAt: string;
+  isLikedByUser?: boolean;
 };
 
 export type ProfileComponentProps = {

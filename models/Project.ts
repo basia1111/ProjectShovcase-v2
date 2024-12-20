@@ -22,6 +22,8 @@ const ProjectSchema = new mongoose.Schema(
     gitHub: { type: [String] },
     documentation: { type: [String] },
     liveDemo: { type: [String] },
+    likeCount: { type: Number, default: 0 },
+    likedBy: { type: [mongoose.Schema.Types.ObjectId], ref: "User", index: true, default: [] },
   },
   { timestamps: true }
 );

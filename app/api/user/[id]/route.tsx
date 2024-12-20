@@ -22,8 +22,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       about: user?.about,
       socialMedia: user?.socialMedia ? { ...user.socialMedia } : null,
       coverImage: user?.coverImage,
+      createdAt: user?.createdAt ? user.createdAt.toISOString() : null,
     };
-    console.error(user);
+
     return NextResponse.json({ user: serializedUser }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });

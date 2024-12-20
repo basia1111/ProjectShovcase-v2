@@ -1,12 +1,20 @@
 import React from "react";
 import ExploreContent from "./ExploreContent";
+import { cookies } from "next/headers";
 
 const fetchProjects = async () => {
+  const nextCookies = await cookies();
   try {
     const response = await fetch(`${process.env.API_URL}/api/project/projects`, {
       method: "GET",
+      headers: {
+        Cookie: `${nextCookies}`,
+      },
+      cache: "no-store",
     });
+
     const data = await response.json();
+
     if (!response.ok) {
       console.error(data.message);
       return null;
@@ -17,8 +25,10 @@ const fetchProjects = async () => {
     return null;
   }
 };
+
 const Explore = async () => {
   const projects = await fetchProjects();
+
   return (
     <div className="-mt-20 min-h-screen w-full bg-[#0D1117] pt-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6 md:py-12 py-6">

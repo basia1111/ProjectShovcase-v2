@@ -1,12 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@lib/db";
 import { findAllProjects } from "@lib/project/findAllProjects";
+import { auth } from "@auth";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const session = await auth();
+
+  console.log("projects session", session);
   await connectDB();
 
   try {
-    const allProjects = await findAllProjects();
+    const allProjects = await findAllProjects(session?.user?.id);
 
     return NextResponse.json(
       {
