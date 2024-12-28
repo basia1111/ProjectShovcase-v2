@@ -20,7 +20,7 @@ export const registerGoogle = async ({ name, email, image }: GoogleData) => {
     const user = new User({ name, email, image, authProvider: "google" });
     const savedUser = await user.save();
     return { ...savedUser.toObject(), id: savedUser._id.toString() };
-  } catch (error) {
+  } catch {
     throw new Error("Error during user registration");
   }
 };

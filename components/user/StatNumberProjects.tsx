@@ -3,7 +3,7 @@ import { Project } from "@types";
 import React, { useContext } from "react";
 
 type StatNumberProps = {
-  icon: any;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   label: string;
   value: number;
   list: Project[];

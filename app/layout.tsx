@@ -2,12 +2,10 @@ import "./globals.css";
 import React from "react";
 import { ReactNode } from "react";
 import Header from "@/components/layout/Header/Header";
-import Provider from "@/components/Provider";
 import { ModalContextProvider } from "@/contexts/ModalContext";
 import { UserContextProvider } from "@/contexts/UserContext";
 import Modal from "@/components/common/Modal";
 import Footer from "@/components/layout/Footer/Footer";
-import { auth } from "@auth";
 import { SessionProvider } from "next-auth/react";
 
 export const metadata = {

@@ -1,5 +1,6 @@
 import { FiHome, FiSearch } from "react-icons/fi";
 import React from "react";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -32,13 +33,13 @@ export default function NotFound() {
         </p>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <a
+          <Link
             href="/"
             className="flex items-center rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 px-4 py-2 text-white hover:from-teal-500 hover:to-emerald-500"
           >
             <FiHome className="mr-2" />
             Back to Home
-          </a>
+          </Link>
           <a
             href="/explore"
             className="flex items-center rounded-lg bg-white/5 px-4 py-2 text-white ring-1 ring-white/10 hover:bg-white/10"

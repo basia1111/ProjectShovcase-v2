@@ -3,7 +3,7 @@ import connectDB from "@lib/db";
 import { findAllProjects } from "@lib/project/findAllProjects";
 import { auth } from "@auth";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const session = await auth();
 
   await connectDB();
