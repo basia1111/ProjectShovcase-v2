@@ -32,10 +32,12 @@ export type Project = {
   status: string;
   category: string;
   techStack: string[];
-  keyFeatures: {
-    title: string;
-    description: string;
-  };
+  keyFeatures: [
+    {
+      title: string;
+      description: string;
+    }
+  ];
   likedBy: User[];
   likeCount: number;
   gitHub?: string;

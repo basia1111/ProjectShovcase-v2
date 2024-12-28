@@ -42,7 +42,7 @@ const ProjectInfo = ({ project }: { project: Project }) => {
         <div className="h-1 w-1 rounded-full bg-white/20" />
         <div className="flex items-center gap-2">
           <div className="h-1.5 w-1.5 rounded-full bg-teal-500/50" />
-          <span>{project.keyFeatures.length} Features</span>
+          <span>{project.keyFeatures?.length} Features</span>
         </div>
       </div>
     </div>

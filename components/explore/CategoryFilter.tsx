@@ -1,6 +1,5 @@
 import React from "react";
 import { PROJECT_CATEGORIES } from "@projectConstants";
-import Card from "@components/common/Card";
 
 type CategoryFilterProps = {
   handleCategoryChange: (category: string | null) => void;
@@ -9,10 +8,10 @@ type CategoryFilterProps = {
 const CategoryFilter = ({ handleCategoryChange, currentCategory }: CategoryFilterProps) => {
   return (
     <div className="md:mb-12 mb-0 flex flex-wrap gap-2">
-      <Card
+      <div
         onClick={() => handleCategoryChange(null)}
         key="all"
-        className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1
+        className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1 transition-all duration-200 inline-flex  gap-2 font-medium  text-gray-300 bg-[#161B22] ring-1 ring-white/10 hover:bg-[#1C2128] 
           ${
             currentCategory === null
               ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
@@ -21,21 +20,21 @@ const CategoryFilter = ({ handleCategoryChange, currentCategory }: CategoryFilte
         `}
       >
         All
-      </Card>
+      </div>
       {PROJECT_CATEGORIES.map((category) => (
-        <Card
+        <div
           onClick={() => handleCategoryChange(category.value)}
           key={category.label}
           className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1
             ${
               currentCategory === category.value
-                ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
+                ? "md:text-base text-xs md:px-4 md:py-2 py-0 px-1 transition-all duration-200 inline-flex  gap-2 font-medium  text-gray-300 bg-[#161B22] ring-1 ring-white/10 hover:bg-[#1C2128]  rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600  hover:from-teal-500 hover:to-emerald-500"
                 : "rounded-lg"
             }
           `}
         >
           {category.label}
-        </Card>
+        </div>
       ))}
     </div>
   );

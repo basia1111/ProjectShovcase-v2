@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { SetStateAction } from "react";
 
-const ProjectStatusInput = ({ status, selectedRadio, setSelectedRadio }) => {
+type ProjectStatusInputProps = {
+  status: {
+    label: string;
+    color: string;
+    value: string;
+  };
+  selectedRadio: string | null;
+  setSelectedRadio: React.Dispatch<SetStateAction<string | null>>;
+};
+const ProjectStatusInput = ({ status, selectedRadio, setSelectedRadio }: ProjectStatusInputProps) => {
   return (
     <div key={status.label}>
       <label
         htmlFor={status.value}
         style={{
-          backgroundColor:
-            selectedRadio == status.value ? `${status.color}30` : `${status.color}10`,
+          backgroundColor: selectedRadio == status.value ? `${status.color}30` : `${status.color}10`,
           color: selectedRadio == status.value ? `${status.color}` : `${status.color}70`,
           border: `1px solid ${selectedRadio == status.value ? `${status.color}` : status.color}70`,
         }}

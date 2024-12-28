@@ -24,17 +24,21 @@ const RegisterForm = () => {
             </p>
           </div>
         ) : message ? (
-          <div className="w-full rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400 backdrop-blur-sm">
-            {message}
-          </div>
+          <div className="w-full rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400 backdrop-blur-sm">{message}</div>
         ) : (
           ""
         )}
       </div>
 
       <form action={formAction}>
-        <Input type="text" name="name" />
-        <Input type="email" name="email" />
+        <Input
+          type="text"
+          name="name"
+        />
+        <Input
+          type="email"
+          name="email"
+        />
         <PasswordInput />
         <button
           type="submit"
