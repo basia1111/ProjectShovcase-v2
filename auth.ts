@@ -5,6 +5,11 @@ import verifyUser from "@lib/auth/verifyUser";
 import { findUser } from "@lib/user/findUser";
 import { registerGoogle } from "@lib/auth/registerGoogle";
 
+type Profile = {
+  email: string;
+  name: string;
+  picture: string;
+};
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GoogleProvider({
@@ -43,7 +48,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async jwt({ token, account, profile, trigger, session, user }) {
       if (account?.provider === "google") {
-        const { email, name, picture } = profile as any;
+        const { email, name, picture } = profile as Profile;
 
         let googleUser = await findUser(email);
         if (!googleUser) {

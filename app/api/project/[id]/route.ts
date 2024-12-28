@@ -3,7 +3,11 @@ import connectDB from "@lib/db";
 import Project from "@models/Project";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+interface Params {
+  id: string;
+}
+
+export async function GET(request: NextRequest, { params }: { params: Params }) {
   const { id } = await params;
   const session = await auth();
   const userId = session?.user?.id;
