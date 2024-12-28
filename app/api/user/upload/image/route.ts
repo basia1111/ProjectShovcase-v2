@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ image: uploadResponse.secure_url, user: updatedUser }, { status: 200 });
   } catch (error) {
     console.error("Upload error:", error);
+
     return NextResponse.json(
       {
         message: error instanceof Error ? error.message : "Unknown error",

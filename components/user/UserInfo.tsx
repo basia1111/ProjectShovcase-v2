@@ -3,12 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import { FiMapPin, FiPackage, FiCalendar } from "react-icons/fi";
+
 import { FaCamera, FaPencilAlt } from "react-icons/fa";
 import { User } from "@types";
 import ModalButton from "@components/common/buttons/ModalButton";
 import EditUserDataForm from "../forms/EditUserDataForm";
 import EditProfileImageForm from "../forms/EditProfileImageForm";
 import { Stat } from "./Stat";
+
 import FollowSection from "./FollowSection";
 
 type UserInfoProps = {

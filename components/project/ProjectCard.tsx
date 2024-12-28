@@ -1,5 +1,6 @@
 import React from "react";
 import { IoTrashBinOutline } from "react-icons/io5";
+
 import { PROJECT_CATEGORIES, PROJECT_STATUSES } from "@projectConstants";
 import DeleteProject from "@components/forms/DeleteProject";
 import ModalButton from "@components/common/buttons/ModalButton";

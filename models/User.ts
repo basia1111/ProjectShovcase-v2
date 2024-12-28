@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
     },
     about: { type: String },
     likedProjects: { type: [mongoose.Schema.Types.ObjectId], ref: "Project", index: true, default: [] },
+
     following: { type: [mongoose.Schema.Types.ObjectId], ref: "User", index: true, default: [] },
     followedBy: { type: [mongoose.Schema.Types.ObjectId], ref: "User", index: true, default: [] },
   },

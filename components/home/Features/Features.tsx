@@ -1,48 +1,45 @@
-import React from 'react';
-import { FiUsers, FiLayout, FiMessageCircle } from 'react-icons/fi';
-import FeatureCard from './FeatureCard';
+import React from "react";
+import { FiUsers, FiLayout, FiMessageCircle } from "react-icons/fi";
+import FeatureCard from "./FeatureCard";
 
 const FeaturesSection = () => {
   const features = [
     {
       icon: FiLayout,
-      title: 'Project Showcase',
-      description:
-        'Create beautiful portfolios to showcase your work with rich media support and custom layouts.',
+      title: "Project Showcase",
+      description: "Create beautiful portfolios to showcase your work with rich media support and custom layouts.",
     },
     {
       icon: FiUsers,
-      title: 'Community Collaboration',
-      description:
-        'Connect with like-minded creators, form teams, and collaborate on exciting new projects.',
+      title: "Community Collaboration",
+      description: "Connect with like-minded creators, form teams, and collaborate on exciting new projects.",
     },
     {
       icon: FiMessageCircle,
-      title: 'Smart Discovery',
-      description:
-        'Find relevant projects and creators through intelligent recommendations and easy navigation.',
+      title: "Smart Discovery",
+      description: "Find relevant projects and creators through intelligent recommendations and easy navigation.",
     },
   ];
 
   return (
-    <div className="relative bg-[#0D1117] py-24">
-      <div className="relative mx-auto max-w-7xl px-6">
+    <div className="relative bg-[#0D1117] py-10 md:py-24">
+      <div className="relative mx-auto max-w-7xl md:px-6 px-4">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-4xl font-bold tracking-tight text-white">
+          <h2 className="mb-4 md:text-4xl text-2xl font-bold tracking-tight text-white">
             Powerful Features for
-            <span className="ml-2 bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent">
-              Modern Creators
-            </span>
+            <span className="ml-2 bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent">Modern Creators</span>
           </h2>
-          <p className="text-gray-400 mx-auto max-w-2xl text-lg">
-            Everything you need to bring your projects to life and collaborate with an engaged
-            community of creators.
+          <p className="text-gray-400 mx-auto max-w-2xl tex-md md:text-lg">
+            Everything you need to bring your projects to life and collaborate with an engaged community of creators.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
-            <FeatureCard key={index} {...feature} />
+            <FeatureCard
+              key={index}
+              {...feature}
+            />
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { auth } from "@auth";
+
 import connectDB from "@lib/db";
 import User from "@models/User";
 import { NextRequest, NextResponse } from "next/server";
@@ -22,6 +23,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       ...plainUser,
       _id: user._id.toString(),
       id: user._id.toString(),
+
       socialMedia: { ...plainUser.socialMedia },
     };
 

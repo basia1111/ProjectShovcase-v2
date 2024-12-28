@@ -7,6 +7,7 @@ import UserInfo from "./UserInfo";
 import About from "./About";
 import Projects from "./Projects";
 import { User } from "@types";
+
 import Contact from "./Contact";
 
 type ProfileProps = {
@@ -46,6 +47,7 @@ const ProfileContent = ({ user: serverUser, viewMode }: ProfileProps) => {
             isOwner={isOwner}
             user={user}
           />
+
           <About
             user={user}
             isOwner={isOwner}

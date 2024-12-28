@@ -2,6 +2,7 @@
 import ModalButton from "@components/common/buttons/ModalButton";
 import EditProjectForm from "@components/forms/EditProjectForm";
 import { Project } from "@types";
+
 import React from "react";
 import { FiCalendar, FiEdit } from "react-icons/fi";
 
@@ -48,6 +49,7 @@ const Header = ({ mode, project, setProject }: HeaderProps) => {
 
         <div className="absolute bottom-0 left-0 right-0 md:p-8 p-4">
           <h1 className="md:mb-6 mb-2 md:text-4xl text-2xl font-bold text-white">{project.title}</h1>
+
           <a
             href={`/profile/${project.author._id}`}
             className="group flex items-center md:gap-3 gap-3 text-gray-300 hover:text-white"

@@ -9,7 +9,7 @@ import connectDB from "@lib/db";
 export async function POST(request: NextRequest) {
   const session = await auth();
   if (!session?.user?.id) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ message: "Unauthorized, no session" }, { status: 401 });
   }
   await connectDB();
 
@@ -32,23 +32,13 @@ export async function POST(request: NextRequest) {
       public_id: session.user.id,
     });
 
-    const updatedUser = await User.findByIdAndUpdate(
-      session.user.id,
-      { coverImage: uploadResponse.secure_url },
-      { new: true }
-    );
+    const updatedUser = await User.findByIdAndUpdate(session.user.id, { coverImage: uploadResponse.secure_url }, { new: true });
 
     await unlink(path);
 
     return NextResponse.json({ user: updatedUser }, { status: 200 });
   } catch (error) {
     console.error("Upload error:", error);
-    return NextResponse.json(
-      {
-        message: "Upload failed",
-        error: error instanceof Error ? error.message : "Unknown error",
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }

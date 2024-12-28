@@ -2,6 +2,7 @@ import React from "react";
 import ProfileContent from "./ProfileContent";
 import { User } from "@types";
 import { notFound } from "next/navigation";
+
 import { cookies } from "next/headers";
 
 type ProfileProps = {
@@ -14,6 +15,7 @@ async function fetchUser(userId: string): Promise<User | null> {
   try {
     const response = await fetch(`${process.env.API_URL}/api/user/${userId}`, {
       cache: "no-store",
+
       headers: {
         Cookie: `${nextCookies}`,
       },

@@ -106,6 +106,7 @@ const ExploreContent = ({ projects }: { projects: Project[] }) => {
             query={queryString}
           />
         </div>
+
         <TopProjects projects={projects} />
       </div>
     </>

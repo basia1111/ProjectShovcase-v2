@@ -26,7 +26,6 @@ const ProjectContent = ({ project: fetchedProject, mode }: { project: Project; m
           setProject={setProject}
         />
         <div className="grid grid-cols-1 md:gap-8 gap-4 lg:grid-cols-[1fr_300px]">
-          {/* Left Column */}
           <div className="md:space-y-8 space-y-4">
             <ProjectInfo project={project} />
             <TechStack project={project} />
@@ -34,7 +33,6 @@ const ProjectContent = ({ project: fetchedProject, mode }: { project: Project; m
             <KeyFeatures project={project} />
           </div>
 
-          {/* Right Column*/}
           <div className="mad:space-y-6 space-y-4">
             <ProjectButtons project={project} />
             <ProjectLinks project={project} />

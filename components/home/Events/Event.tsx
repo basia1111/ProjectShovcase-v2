@@ -1,6 +1,6 @@
-import React from 'react';
-import { FiCalendar, FiUsers, FiMap, FiClock } from 'react-icons/fi';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from "react";
+import { FiCalendar, FiUsers, FiMap, FiClock } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 type Event = {
   day: string;
@@ -24,14 +24,14 @@ const Event = ({ event, isActive, onClick }: EventProps) => {
       opacity: 0,
       transition: {
         duration: 0.3,
-        ease: 'easeOut',
+        ease: "easeOut",
       },
     },
     animate: {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
+        ease: "easeOut",
         staggerChildren: 0.1,
         delayChildren: 0.2,
       },
@@ -40,7 +40,7 @@ const Event = ({ event, isActive, onClick }: EventProps) => {
       opacity: 0,
       transition: {
         duration: 0.3,
-        ease: 'easeOut',
+        ease: "easeOut",
       },
     },
   };
@@ -65,7 +65,7 @@ const Event = ({ event, isActive, onClick }: EventProps) => {
         opacity: { duration: 0.35 },
         scale: {
           duration: 0.3,
-          ease: 'easeOut',
+          ease: "easeOut",
         },
       },
     },
@@ -84,18 +84,14 @@ const Event = ({ event, isActive, onClick }: EventProps) => {
 
   return (
     <div
-      className={`relative flex cursor-pointer transition-all duration-500 ${
-        isActive ? 'opacity-100' : 'opacity-50 hover:opacity-75'
-      }`}
+      className={`relative flex cursor-pointer transition-all duration-500 ${isActive ? "opacity-100" : "opacity-50 hover:opacity-75"}`}
       onClick={onClick}
     >
-      <div className="absolute left-[27px] top-0 h-full w-px bg-white/10" />
+      <div className="absolute left-[20px] top-0 h-full w-px bg-white/10" />
 
       <div
-        className={`relative z-10 mt-8 h-14 w-14 shrink-0 rounded-full bg-gradient-to-r p-[2px] transition-all duration-300 ${
-          isActive
-            ? 'rotate-0 scale-110 from-teal-400 to-emerald-400'
-            : 'rotate-12 from-teal-400/20 to-emerald-400/20'
+        className={`relative z-10 mt-8 md:h-14 md:w-14 h-10 w-10 shrink-0 rounded-full bg-gradient-to-r p-[2px] transition-all duration-300 ${
+          isActive ? "rotate-0 scale-110 from-teal-400 to-emerald-400" : "rotate-12 from-teal-400/20 to-emerald-400/20"
         }`}
       >
         <div className={`flex h-full w-full items-center justify-center rounded-full bg-[#0D1117]`}>
@@ -103,56 +99,60 @@ const Event = ({ event, isActive, onClick }: EventProps) => {
         </div>
       </div>
 
-      <div className={`ml-8 transition-all duration-300 ${isActive ? 'pl-3' : ''}`}>
+      <div className={`md:ml-8 ml-2 transition-all duration-300 ${isActive ? "pl-3" : ""}`}>
         <div className="mt-6 flex items-center gap-2 text-sm text-teal-400">
           <FiCalendar className="h-4 w-4" />
           {event.month}
         </div>
         <h3 className="mt-2 text-xl font-bold text-white">{event.title}</h3>
-        <AnimatePresence>
-          {isActive && (
-            <motion.div
-              variants={eventDataVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="transition-all duration-500"
+        {isActive && (
+          <motion.div
+            variants={eventDataVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="transition-all duration-500"
+          >
+            <motion.p
+              variants={childVariants}
+              className="text-gray-400"
             >
-              <motion.p variants={childVariants} className="text-gray-400">
-                {event.description}
-              </motion.p>
+              {event.description}
+            </motion.p>
 
-              <motion.div
-                variants={childVariants}
-                className="text-gray-400 mt-4 flex flex-wrap gap-4 text-sm"
-              >
-                <div className="flex items-center gap-1">
-                  <FiClock className="h-4 w-4" />
-                  {event.time}
-                </div>
-                <div className="flex items-center gap-1">
-                  <FiUsers className="h-4 w-4" />
-                  {event.attendees} attending
-                </div>
-                <div className="flex items-center gap-1">
-                  <FiMap className="h-4 w-4" />
-                  {event.location}
-                </div>
-              </motion.div>
-
-              <motion.div variants={childVariants} className="mt-4 flex flex-wrap gap-2">
-                {event.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="rounded-full bg-gradient-to-r from-teal-500/10 to-emerald-500/10 px-3 py-1 text-sm text-teal-400 ring-1 ring-teal-500/20"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
+            <motion.div
+              variants={childVariants}
+              className="text-gray-400 mt-4 flex flex-wrap gap-4 text-sm"
+            >
+              <div className="flex items-center gap-1">
+                <FiClock className="h-4 w-4" />
+                {event.time}
+              </div>
+              <div className="flex items-center gap-1">
+                <FiUsers className="h-4 w-4" />
+                {event.attendees} attending
+              </div>
+              <div className="flex items-center gap-1">
+                <FiMap className="h-4 w-4" />
+                {event.location}
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
+
+            <motion.div
+              variants={childVariants}
+              className="mt-4 flex flex-wrap gap-2"
+            >
+              {event.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="rounded-full bg-gradient-to-r from-teal-500/10 to-emerald-500/10 px-3 py-1 text-sm text-teal-400 ring-1 ring-teal-500/20"
+                >
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
       </div>
     </div>
   );

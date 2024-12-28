@@ -1,6 +1,8 @@
 import { auth } from "@auth";
 import connectDB from "@lib/db";
+
 import User from "@models/User";
+
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest, { params }: { params: { id: string; followedId: string } }) {
