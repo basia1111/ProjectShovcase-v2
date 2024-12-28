@@ -24,7 +24,7 @@ const CreateProjectForm = ({ updateProjects }: CreateProjectFormType) => {
   const [message, setMessage] = useState("");
   const [preview, setPreviewImage] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedRadio, setSelectedRadio] = useState<string | null>(null);
+  const [selectedRadio, setSelectedRadio] = useState<string>("");
   const [featuresList, setFeaturesList] = useState<{ title: string; description: string }[]>([]);
   const [techStackList, setTechStackList] = useState<string[]>([]);
   const { closeModal } = useContext(ModalContext)!;
