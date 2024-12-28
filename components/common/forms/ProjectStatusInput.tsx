@@ -6,7 +6,7 @@ type ProjectStatusInputProps = {
     color: string;
     value: string;
   };
-  selectedRadio: string | null;
+  selectedRadio: string;
   setSelectedRadio: React.Dispatch<SetStateAction<string>>;
 };
 const ProjectStatusInput = ({ status, selectedRadio, setSelectedRadio }: ProjectStatusInputProps) => {
