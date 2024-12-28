@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.62.8",
     "@types/bcrypt": "^5.0.2",
     "@types/mongoose": "^5.11.96",
     "bcryptjs": "^2.4.3",

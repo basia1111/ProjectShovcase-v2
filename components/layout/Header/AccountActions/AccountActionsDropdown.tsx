@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { signOut } from "next-auth/react";
@@ -16,10 +15,7 @@ const AccountActionsDropdown = () => {
   };
 
   const handleClickOutside = (e: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(e.target as Node)
-    ) {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
       setActionDropdown(false);
     }
   };
@@ -61,7 +57,10 @@ const AccountActionsDropdown = () => {
   };
 
   return (
-    <div ref={dropdownRef} className="relative">
+    <div
+      ref={dropdownRef}
+      className="relative"
+    >
       <PiDotsThreeVerticalBold
         onClick={handleDropdown}
         className="cursor-pointer text-white/80 transition-colors hover:text-white"
@@ -76,12 +75,12 @@ const AccountActionsDropdown = () => {
             exit="exit"
             className="absolute right-2 top-10 flex w-auto flex-col gap-2 rounded-md border border-white/10 bg-[#0f151c]/95 p-4 pr-20 text-left text-white/90 shadow-lg backdrop-blur-md"
           >
-            <Link
+            <a
               href="/my-profile"
               className="transition-colors hover:text-white"
             >
               Profile
-            </Link>
+            </a>
             <p
               className="cursor-pointer transition-colors hover:text-white"
               onClick={handleLogout}

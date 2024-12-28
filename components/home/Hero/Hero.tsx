@@ -1,11 +1,8 @@
-'use client';
+import React from "react";
+import { FiArrowRight, FiSearch, FiCode, FiCpu, FiGlobe, FiServer } from "react-icons/fi";
+import FloatingCard from "./FloatingCard";
 
-import Button from '@components/common/buttons/Button';
-import React from 'react';
-import { FiArrowRight, FiSearch, FiCode, FiCpu, FiGlobe, FiServer } from 'react-icons/fi';
-import FloatingCard from './FloatingCard';
-
-const HomeHero = () => {
+const HomeHero = async () => {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0D1117]">
       <div className="absolute inset-0">
@@ -25,25 +22,25 @@ const HomeHero = () => {
             <div className="absolute -right-4 -top-4 h-24 w-24 animate-pulse rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 blur-xl" />
             <h1 className="relative text-5xl font-bold tracking-tight text-white md:text-7xl">
               Where Ideas
-              <span className="relative mx-4 whitespace-nowrap bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent">
-                Come to Life
-              </span>
+              <span className="relative mx-4 whitespace-nowrap bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent">Come to Life</span>
             </h1>
           </div>
           <p className="text-gray-400 mt-6 max-w-2xl text-lg">
-            Your platform to showcase innovative projects, connect with fellow creators, and build
-            something extraordinary together.
+            Your platform to showcase innovative projects, connect with fellow creators, and build something extraordinary together.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button className="group bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500">
+            <a
+              href={"/my-profile"}
+              className="group flex rounded-lg px-4 py-2 gap-2 items-center bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
+            >
               Start Creating
               <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
-            <Button className="group bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">
+            </a>
+            <a className="group flex rounded-lg px-4 py-2 gap-2 items-center bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">
               <FiSearch />
               Explore Projects
-            </Button>
+            </a>
           </div>
 
           <div className="relative mt-20 h-[400px] w-full max-w-4xl">

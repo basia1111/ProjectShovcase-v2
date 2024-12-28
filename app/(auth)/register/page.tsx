@@ -1,15 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
-import RegisterForm from '@components/authForms/RegisterForm';
-import { auth } from '@auth';
-import { redirect } from 'next/navigation';
-import GoogleButton from '@components/authForms/GoogleButton';
+import React from "react";
+import RegisterForm from "@components/authForms/RegisterForm";
+import { auth } from "@auth";
+import { redirect } from "next/navigation";
+import GoogleButton from "@components/authForms/GoogleButton";
 
 const page = async () => {
   const session = await auth();
 
   if (session && session.user && session.user.id) {
-    redirect('/my-profile');
+    redirect("/my-profile");
   }
 
   return (
@@ -18,9 +17,12 @@ const page = async () => {
       <GoogleButton />
       <RegisterForm />
       <div className="mt-8 text-center text-sm text-white">
-        <Link href="/login" className="transition-colors hover:text-white/80">
+        <a
+          href="/login"
+          className="transition-colors hover:text-white/80"
+        >
           Already have an account? <span className="font-bold underline">Login</span>
-        </Link>
+        </a>
       </div>
     </div>
   );

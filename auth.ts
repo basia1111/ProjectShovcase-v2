@@ -1,9 +1,9 @@
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import verifyUser from '@lib/auth/verifyUser';
-import { findUser } from '@lib/user/findUser';
-import { registerGoogle } from '@lib/auth/registerGoogle';
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import verifyUser from "@lib/auth/verifyUser";
+import { findUser } from "@lib/user/findUser";
+import { registerGoogle } from "@lib/auth/registerGoogle";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -12,14 +12,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       credentials: {
-        email: { label: 'Email', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const email = (credentials?.email ?? '') as string;
-        const password = (credentials?.password ?? '') as string;
+        const email = (credentials?.email ?? "") as string;
+        const password = (credentials?.password ?? "") as string;
 
         try {
           const user = await verifyUser(email, password);
@@ -31,7 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
     maxAge: 24 * 60 * 60,
   },
   jwt: {
@@ -42,7 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return `${baseUrl}/my-profile`;
     },
     async jwt({ token, account, profile, trigger, session, user }) {
-      if (account?.provider === 'google') {
+      if (account?.provider === "google") {
         const { email, name, picture } = profile as any;
 
         let googleUser = await findUser(email);
@@ -59,7 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.email = user.email;
         token.image = user.image;
       }
-      if (trigger === 'update') {
+      if (trigger === "update") {
         token.image = session.image;
       }
       return token;
@@ -78,6 +78,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   pages: {
-    signIn: '/login',
+    signIn: "/login",
   },
 });

@@ -1,5 +1,3 @@
-import { Date } from "mongoose";
-
 export type User = {
   id: string;
   _id?: string;
@@ -11,10 +9,16 @@ export type User = {
   about?: string;
   socialMedia?: {
     twitter?: string;
-    linkedIn?: string;
+    linkedin?: string;
     github?: string;
   };
+  likedProjects: Project[];
   coverImage?: string;
+  createdAt: string;
+  updatedAt: string;
+  followedBy: User[];
+  following: User[];
+  isFollowed?: boolean;
 };
 
 export type Project = {
@@ -24,10 +28,22 @@ export type Project = {
   description: string;
   author: User;
   cover?: string;
+  email: string;
   status: string;
   category: string;
-  createdAt: Date;
-  updatedAt: Date;
+  techStack: string[];
+  keyFeatures: {
+    title: string;
+    description: string;
+  };
+  likedBy: User[];
+  likeCount: number;
+  gitHub?: string;
+  documentation?: string;
+  liveDemo?: string;
+  createdAt: string;
+  updatedAt: string;
+  isLikedByUser?: boolean;
 };
 
 export type ProfileComponentProps = {

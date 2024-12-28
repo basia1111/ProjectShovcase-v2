@@ -1,5 +1,6 @@
 import React from "react";
 import { PROJECT_CATEGORIES } from "@projectConstants";
+import Card from "@components/common/Card";
 
 type CategoryFilterProps = {
   handleCategoryChange: (category: string | null) => void;
@@ -7,30 +8,34 @@ type CategoryFilterProps = {
 };
 const CategoryFilter = ({ handleCategoryChange, currentCategory }: CategoryFilterProps) => {
   return (
-    <div className="mb-12 flex flex-wrap gap-2">
-      <div
+    <div className="md:mb-12 mb-0 flex flex-wrap gap-2">
+      <Card
         onClick={() => handleCategoryChange(null)}
         key="all"
-        className={`transition-all duration-200 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium  ${
-          currentCategory === null
-            ? "bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
-            : "text-gray-300 bg-[#161B22] ring-1 ring-white/10 hover:bg-[#1C2128]"
-        }`}
+        className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1
+          ${
+            currentCategory === null
+              ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
+              : "rounded-lg"
+          }
+        `}
       >
         All
-      </div>
+      </Card>
       {PROJECT_CATEGORIES.map((category) => (
-        <div
+        <Card
           onClick={() => handleCategoryChange(category.value)}
           key={category.label}
-          className={`transition-all duration-200 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium  ${
-            currentCategory === category.value
-              ? "bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
-              : "text-gray-300 bg-[#161B22] ring-1 ring-white/10 hover:bg-[#1C2128]"
-          }`}
+          className={` md:text-base text-xs md:px-4 md:py-2 py-0 px-1
+            ${
+              currentCategory === category.value
+                ? "rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-500 hover:to-emerald-500"
+                : "rounded-lg"
+            }
+          `}
         >
           {category.label}
-        </div>
+        </Card>
       ))}
     </div>
   );

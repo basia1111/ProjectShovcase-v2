@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { createContext, ReactNode, useState, useContext, useEffect } from 'react';
-import { getSession } from 'next-auth/react';
-import { User } from '@types';
-import { findUser } from '@lib/user/findUser';
+import React, { createContext, ReactNode, useState, useContext, useEffect } from "react";
+import { getSession } from "next-auth/react";
+import { User } from "@types";
+import { findUser } from "@lib/user/findUser";
 
 type UserContextType = {
   user: User | null;
@@ -20,7 +20,6 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   const updateUser = (newUser: Partial<User>) => {
     setUser((prev) => (prev ? { ...prev, ...newUser } : ({ ...newUser } as User)));
-    console.log(user);
   };
 
   const fetchUser = async () => {
@@ -34,7 +33,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setUser(null);
       }
     } catch (error) {
-      console.error('Error fetching user session:', error);
+      console.error("Error fetching user session:", error);
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -45,17 +44,13 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     fetchUser();
   }, []);
 
-  return (
-    <UserContext.Provider value={{ user, updateUser, fetchUser, isLoading }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ user, updateUser, fetchUser, isLoading }}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {
-    throw new Error('useUser must be used within a UserContextProvider');
+    throw new Error("useUser must be used within a UserContextProvider");
   }
   return context;
 };

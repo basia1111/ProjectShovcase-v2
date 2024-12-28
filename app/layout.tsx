@@ -7,6 +7,8 @@ import { ModalContextProvider } from "@/contexts/ModalContext";
 import { UserContextProvider } from "@/contexts/UserContext";
 import Modal from "@/components/common/Modal";
 import Footer from "@/components/layout/Footer/Footer";
+import { auth } from "@auth";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
   title: "Startup Toolkit",
@@ -18,12 +20,12 @@ type RootProps = {
   children: ReactNode;
 };
 
-const Root = ({ children }: RootProps) => {
+const Root = async ({ children }: RootProps) => {
   return (
     <html lang="en">
       <body>
-        <UserContextProvider>
-          <Provider>
+        <SessionProvider>
+          <UserContextProvider>
             <ModalContextProvider>
               <main className="app-wrapper relative flex min-h-screen w-full flex-col items-center">
                 <Header />
@@ -32,8 +34,8 @@ const Root = ({ children }: RootProps) => {
                 <Modal />
               </main>
             </ModalContextProvider>
-          </Provider>
-        </UserContextProvider>
+          </UserContextProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -1,27 +1,24 @@
-import { NextResponse } from 'next/server';
-import connectDB from '@lib/db';
-import { findAllProjects } from '@lib/project/findAllProjects';
+import { NextRequest, NextResponse } from "next/server";
+import connectDB from "@lib/db";
+import { findAllProjects } from "@lib/project/findAllProjects";
+import { auth } from "@auth";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const session = await auth();
+
   await connectDB();
 
   try {
-    const allProjects = await findAllProjects();
+    const allProjects = await findAllProjects(session?.user?.id);
 
     return NextResponse.json(
       {
         projects: allProjects,
-        message: allProjects?.length === 0 ? 'There are no projects yeat' : undefined,
+        message: allProjects?.length === 0 ? "There are no projects yeat" : undefined,
       },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
-    console.error('Project fetch error:', error);
-    return NextResponse.json(
-      {
-        message: error instanceof Error ? error.message : 'Internal server error',
-      },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }
