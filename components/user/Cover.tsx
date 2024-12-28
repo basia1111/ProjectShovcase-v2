@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { FaPaintBrush } from "react-icons/fa";
 import EditProfileCoverForm from "../forms/EditProfileCoverForm";

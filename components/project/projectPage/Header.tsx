@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import ModalButton from "@components/common/buttons/ModalButton";
 import EditProjectForm from "@components/forms/EditProjectForm";
 import { Project } from "@types";

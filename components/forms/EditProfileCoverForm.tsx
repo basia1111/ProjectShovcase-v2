@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState, useContext } from "react";
 import { FaCheck } from "react-icons/fa";
 import { ModalContext } from "@contexts/ModalContext";
