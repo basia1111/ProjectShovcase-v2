@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ProjectShowcase
 
-## Getting Started
+**ProjectShowcase** is a dynamic Next.js application that enables users to create, explore, and interact with projects shared by the community. Built with cutting-edge web technologies, it offers seamless authentication, robust filtering options, and an intuitive user experience.
 
-First, run the development server:
+<img width="800" alt="app-screenshot" src="https://github.com/user-attachments/assets/481bfdb4-5535-4678-9c11-89972379c716" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Authentication
+- **NextAuth v5:** Supports credentials-based authentication.
+- **Google OAuth Integration:** Users can log in securely with their Google accounts.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### User Functionality
+- **Create Projects:** Share your work with the community by creating detailed project entries.
+- **User Profile Dashboard:** Manage your projects and view your activity through a personalized dashboard.
+- **Follow Users:** Stay updated by following other creators.
+- **Like Projects:** Show appreciation by liking your favorite projects.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Explore Projects
+- **Category Filtering:** Browse projects based on specific categories.
+- **Search Filter:** Quickly find projects using keywords.
+- **Sorting Options:** Sort projects by popularity, date, or other criteria.
+- **Pagination:** Navigate through large datasets efficiently.
 
-## Learn More
+### Media Management
+- **Cloudinary Integration:** Store and manage user and project images seamlessly using Cloudinary.
 
-To learn more about Next.js, take a look at the following resources:
+### Responsive Design
+- Fully optimized for desktop, tablet, and mobile devices, ensuring a seamless user experience.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
+- **Next.js:** Framework for server-side rendering and React-based web applications.
+- **TypeScript:** Strongly typed programming language for safer and scalable code.
+- **Tailwind CSS:** Utility-first CSS framework for rapid UI development.
+- **Cloudinary:** Cloud-based media management for storing and retrieving images.
+- **NextAuth v5:** Authentication solution for secure user logins.
+- **Vercel:** Hosting for fast, reliable deployment.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Setup
 
-## Deploy on Vercel
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-repo/project-showcase.git
+   cd project-showcase
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Environment Variables**:
+   Create a `.env.local` file in the root directory and add the following:
+   ```env
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   API_URL="http://localhost:3000/"
+   MONGODB_URI=
+   CLOUDINARY_CLOUD_NAME=
+   CLOUDINARY_API_KEY=
+   CLOUDINARY_API_SECRET=
+   NEXTAUTH_URL="http://localhost:3000"
+   ```
+
+4. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Visit [http://localhost:3000](http://localhost:3000) in your browser.
+
+5. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+   Deploy the build folder to your preferred hosting service.
+
+## Demo
+Check out the live application: [ProjectShowcase](https://project-showcase-pied.vercel.app/explore)
+
+## Contributing
+
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch.
+3. Commit your changes.
+4. Push to your branch and create a pull request.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+**Happy showcasing!**
+
+
