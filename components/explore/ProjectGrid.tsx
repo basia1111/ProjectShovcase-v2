@@ -18,7 +18,7 @@ type ProjectGridProps = {
 
 const ProjectGrid = ({ projects, currentCategory, activePage, handlePageChange, sorting, query }: ProjectGridProps) => {
   const [loading, setLoading] = useState(false);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   const resultsFrom = (activePage - 1) * itemsPerPage;
   const resultsTo = activePage * itemsPerPage;
