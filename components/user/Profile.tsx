@@ -9,13 +9,12 @@ type ProfileProps = {
   userId: string;
   viewMode: "private" | "public";
 };
-async function fetchUser(userId: string): Promise<User | null> {
+const fetchUser = async (userId: string): Promise<User | null> => {
   const nextCookies = await cookies();
 
   try {
     const response = await fetch(`${process.env.API_URL}/api/user/${userId}`, {
       cache: "no-store",
-
       headers: {
         Cookie: `${nextCookies}`,
       },
@@ -34,7 +33,7 @@ async function fetchUser(userId: string): Promise<User | null> {
     console.error("Error fetching user:", error);
     return null;
   }
-}
+};
 
 const Profile = async ({ userId, viewMode }: ProfileProps) => {
   const user = await fetchUser(userId);
