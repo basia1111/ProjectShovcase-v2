@@ -2,12 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import cloudinary from "@utils/claudinary";
 import { auth } from "@/auth";
 import User from "@/models/User";
-import { unlink, writeFile } from "fs/promises";
-import { join } from "path";
+import { PassThrough } from "stream";
 import connectDB from "@lib/db";
+import { Session } from "next-auth";
+type CloudinaryResponse = {
+  secure_url: string;
+  [key: string]: any;
+};
 
 export async function POST(request: NextRequest) {
-  const session = await auth();
+  const session = (await auth()) as Session & {
+    user: {
+      id: string;
+      [key: string]: any;
+    };
+  };
   if (!session?.user?.id) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
@@ -24,18 +33,29 @@ export async function POST(request: NextRequest) {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = join(process.cwd(), "public", `temp-${session.user.id}`);
 
-    await writeFile(path, buffer);
+    const uploadResponse = await new Promise<CloudinaryResponse>((resolve, reject) => {
+      const passthroughStream = new PassThrough();
+      passthroughStream.end(buffer);
 
-    const uploadResponse = await cloudinary.uploader.upload(path, {
-      folder: "profile_pictures",
-      public_id: session.user.id,
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: "profile_pictures",
+            public_id: session.user.id,
+            resource_type: "auto",
+          },
+          (error, result) => {
+            if (error) {
+              console.error("Cloudinary upload error", error);
+              return reject(error);
+            }
+            resolve(result as CloudinaryResponse);
+          }
+        )
+        .end(buffer);
     });
-
     const updatedUser = await User.findByIdAndUpdate(session.user.id, { image: uploadResponse.secure_url }, { new: true });
-
-    await unlink(path);
 
     return NextResponse.json({ image: uploadResponse.secure_url, user: updatedUser }, { status: 200 });
   } catch (error) {
