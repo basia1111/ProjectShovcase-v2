@@ -11,10 +11,10 @@ export const findUser = async (email: string) => {
     return null;
   }
 
-  const returnedUser = await User.findOne({ email })
+  const returnedUser = await User.findOne({ email }); /*
     .populate("likedProjects", "_id, title, cover")
     .populate("followedBy", "_id name image")
-    .populate("following", "_id name image");
+    .populate("following", "_id name image");*/
 
   if (!returnedUser) return null;
 
