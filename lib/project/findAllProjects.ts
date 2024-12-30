@@ -1,5 +1,5 @@
-import Project from "@models/Project";
 import connectDB from "@lib/db";
+import Project from "@models/Project";
 
 export const findAllProjects = async (id: string | null = null) => {
   await connectDB();
