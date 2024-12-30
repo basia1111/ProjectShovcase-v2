@@ -1,5 +1,6 @@
 import connectDB from "@lib/db";
 import User from "@models/User";
+import Project from "@models/Project";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
@@ -8,7 +9,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   await connectDB();
 
   try {
-    const user = await User.findById(id); /*.populate("likedProjects").populate("followedBy", "_id name image").populate("following", "_id name image");*/
+    const user = await User.findById(id).populate("likedProjects").populate("followedBy", "_id name image").populate("following", "_id name image");
     if (!user) {
       console.log("User not found");
       return NextResponse.json({ message: "User not found" }, { status: 404 });
