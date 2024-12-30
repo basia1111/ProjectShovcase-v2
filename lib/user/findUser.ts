@@ -13,7 +13,7 @@ export const findUser = async (email: string) => {
   }
 
   const returnedUser = await User.findOne({ email })
-    /* .populate("likedProjects", "_id title cover")*/
+    .populate("likedProjects", "_id title cover")
     .populate("followedBy", "_id name image")
     .populate("following", "_id name image");
 
