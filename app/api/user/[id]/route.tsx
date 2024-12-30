@@ -2,9 +2,11 @@ import connectDB from "@lib/db";
 import User from "@models/User";
 import Project from "@models/Project";
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@auth";
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   const { id } = await params;
+  const session = await auth();
 
   await connectDB();
 
@@ -21,6 +23,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       _id: user._id.toString(),
       id: user._id.toString(),
       socialMedia: { ...plainUser.socialMedia },
+      isFollowed:
+        session && "user" in session && session.user && "id" in session.user
+          ? plainUser.followedBy.some((follower: any) => follower._id.toString() === session.user!.id)
+          : false,
     };
     return NextResponse.json({ user: serializedUser }, { status: 200 });
   } catch (error) {
