@@ -3,8 +3,12 @@ import connectDB from "@lib/db";
 import Project from "@models/Project";
 import cloudinary from "@utils/claudinary";
 import { NextRequest, NextResponse } from "next/server";
-import { unlink, writeFile } from "fs/promises";
-import { join } from "path";
+import { PassThrough } from "stream";
+
+type CloudinaryResponse = {
+  secure_url: string;
+  [key: string]: any;
+};
 
 export async function POST(request: NextRequest) {
   const session = await auth();
@@ -36,13 +40,26 @@ export async function POST(request: NextRequest) {
   try {
     const bytes = await inputFile.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const path = join(process.cwd(), "public", `temp-${session.user.id}`);
 
-    await writeFile(path, buffer);
+    const uploadResponse = await new Promise<CloudinaryResponse>((resolve, reject) => {
+      const passthroughStream = new PassThrough();
+      passthroughStream.end(buffer);
 
-    const uploadResponse = await cloudinary.uploader.upload(path, {
-      folder: "project_cover_pictures",
-      public_id: `${author}_${title.replace(/\s+/g, "_")}`,
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: "project_cover_pictures",
+            public_id: `${author}_${title.replace(/\s+/g, "_")}`,
+          },
+          (error, result) => {
+            if (error) {
+              console.error("Cloudinary upload error:", error);
+              return reject(error);
+            }
+            resolve(result as CloudinaryResponse);
+          }
+        )
+        .end(buffer);
     });
 
     const newProject = new Project({
@@ -61,7 +78,6 @@ export async function POST(request: NextRequest) {
     });
 
     await newProject.save();
-    await unlink(path);
     if (!newProject) {
       return NextResponse.json({ message: "Failed to create project" }, { status: 500 });
     }

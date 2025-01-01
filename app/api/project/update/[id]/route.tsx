@@ -2,9 +2,8 @@ import { auth } from "@auth";
 import connectDB from "@lib/db";
 import Project from "@models/Project";
 import cloudinary from "@utils/claudinary";
-import { writeFile, unlink } from "fs/promises";
 import { NextResponse, NextRequest } from "next/server";
-import { join } from "path";
+import { PassThrough } from "stream";
 
 type UpdateData = {
   title: string;
@@ -20,6 +19,10 @@ type UpdateData = {
   documentation: string;
   cover?: string;
 };
+type CloudinaryResponse = {
+  secure_url: string;
+  [key: string]: any;
+};
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -29,7 +32,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json({ message: "Unauthorized, no session" }, { status: 401 });
     }
 
-    const { id } = params;
+    const { id } = await params;
     if (!id) {
       return NextResponse.json({ message: "Project ID is required" }, { status: 400 });
     }
@@ -80,15 +83,27 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       try {
         const bytes = await inputFile.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const tempPath = join(process.cwd(), "public", `temp-${session.user.id}-${Date.now()}`);
 
-        await writeFile(tempPath, buffer);
+        const uploadResponse = await new Promise<CloudinaryResponse>((resolve, reject) => {
+          const passthroughStream = new PassThrough();
+          passthroughStream.end(buffer);
 
-        const uploadResponse = await cloudinary.uploader.upload(tempPath, {
-          folder: "project_cover_pictures",
-          public_id: `${project.author}_${updateData.title.replace(/\s+/g, "_")}`,
+          cloudinary.uploader
+            .upload_stream(
+              {
+                folder: "project_cover_pictures",
+                public_id: `${project.author}_${updateData.title.replace(/\s+/g, "_")}`,
+              },
+              (error, result) => {
+                if (error) {
+                  console.error("Cloudinary upload error:", error);
+                  return reject(error);
+                }
+                resolve(result as CloudinaryResponse);
+              }
+            )
+            .end(buffer);
         });
-        await unlink(tempPath).catch(console.error);
 
         updateData.cover = uploadResponse.secure_url;
       } catch (error) {
