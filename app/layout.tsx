@@ -9,7 +9,7 @@ import Footer from "@/components/layout/Footer/Footer";
 import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
-  title: "Startup Toolkit",
+  title: "ProjectShowcase",
   description:
     "A community-driven resource hub where entrepreneurs and founders share valuable insights, tools, and tips for building and growing startups. Find curated resources on funding, marketing, product development, and more.",
 };

@@ -70,7 +70,7 @@ const Like = ({ project }: { project: Project }) => {
 
   return (
     <button
-      className="group/like flex  items-center justify-center rounded-lg p-2 bg-white/5 transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-teal-500/20"
+      className="group/like text-gray-300 h-9 items-center justify-center flex px-2 gap-1 rounded-lg bg-white/5 font-medium ring-1 ring-white/10 transition-all duration-200 hover:bg-[#1C2128]"
       onClick={handleButtonClick}
       disabled={likeState.loading}
     >
