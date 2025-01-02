@@ -33,10 +33,10 @@ export async function POST(request: NextRequest) {
   const gitHub = formData.get("gitHub") as string;
   const author = session.user.id;
 
-  if (!title || !description || !email || !category || !status || !inputFile || !techStack || !keyFeatures || !inputFile) {
-    return NextResponse.json({ message: "Sections marked with * are required" }, { status: 400 });
+  if (!title || !description || !email || !category || !status || !inputFile || !techStack || !keyFeatures || inputFile.size == 0) {
+    return NextResponse.json({ message: "All sections marked with * are required" }, { status: 400 });
   }
-
+  console.log(inputFile);
   try {
     const bytes = await inputFile.arrayBuffer();
     const buffer = Buffer.from(bytes);

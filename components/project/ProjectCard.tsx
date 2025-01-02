@@ -58,7 +58,7 @@ const ProjectCard = ({ project, setProjectsList, isOwner, setProjectsNumber }: P
             href={`/project/${project._id}`}
             className="block"
           >
-            <h3 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors duration-300 mb-3">{project.title}</h3>
+            <h3 className="text-xl font-bold text-white group-hover:text-teal-400 line-clamp-1 transition-colors duration-300 mb-3">{project.title}</h3>
           </a>
           <p className="text-sm leading-relaxed text-white/60 line-clamp-2 mb-6">{project.description}</p>
 

@@ -21,11 +21,13 @@ const FollowSection = ({ user, isOwner }: FollowSectionType) => {
   const { openModal } = useContext(ModalContext)!;
 
   useEffect(() => {
+    setFollowState((prev) => ({ ...prev, loading: true }));
     setFollowState((prev) => ({
       ...prev,
       isFollowed: user.isFollowed,
       followedByCount: user.followedBy.length,
     }));
+    setFollowState((prev) => ({ ...prev, loading: false }));
   }, [user.followedBy.length, user.isFollowed]);
 
   const { data: session } = useSession();

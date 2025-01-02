@@ -39,8 +39,9 @@ const ProjectGrid = ({ projects, currentCategory, activePage, handlePageChange, 
     }
     if (sorting === "asc") {
       projectList = [...projectList].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    }
-    if (sorting === "desc") {
+    } else if (sorting === "desc") {
+      projectList = [...projectList].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else {
       projectList = [...projectList].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     }
 
@@ -51,7 +52,7 @@ const ProjectGrid = ({ projects, currentCategory, activePage, handlePageChange, 
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [currentCategory, sorting, query, activePage]);

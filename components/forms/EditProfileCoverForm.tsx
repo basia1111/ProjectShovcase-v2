@@ -57,7 +57,7 @@ const EditProfileCoverForm = () => {
       <SectionTitle title="Edit profile cover image" />
       <div className="relative mt-4 h-44 w-[95%] rounded-2xl bg-white p-4 md:h-60">
         <img
-          src={previewImage || user?.coverImage || "/images/cover-placeholder.png"}
+          src={previewImage || user?.coverImage}
           className="h-full w-full object-cover transition-all duration-300 group-hover:brightness-75"
           alt="Cover"
         />

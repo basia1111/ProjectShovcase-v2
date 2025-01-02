@@ -5,7 +5,6 @@ import Profile from "@components/user/Profile";
 
 export default async function ProfilePagePrivate() {
   const session = await auth();
-  console.log("Session my profile:", session);
 
   if (!session?.user?.id) {
     console.log("No user ID, redirecting");

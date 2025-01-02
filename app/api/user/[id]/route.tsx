@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       console.log("User not found");
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
-    console.log("User found", user);
+
     const plainUser = user.toObject();
     const serializedUser = {
       ...plainUser,
