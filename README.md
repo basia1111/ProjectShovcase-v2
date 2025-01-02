@@ -3,6 +3,7 @@
 **ProjectShowcase** is a dynamic Next.js application that enables users to create, explore, and interact with projects shared by the community. Built with cutting-edge web technologies, it offers seamless authentication, robust filtering options, and an intuitive user experience.
 
 <img width="800" alt="app-screenshot" src="https://github.com/user-attachments/assets/481bfdb4-5535-4678-9c11-89972379c716" />
+<img width="800" alt="Zrzut ekranu 2025-01-2 o 11 31 22" src="https://github.com/user-attachments/assets/9626301f-0b22-4ce2-b01e-977fcff8bdac" />
 
 ## Features
 
